@@ -1,0 +1,149 @@
+<div id="start-quiz" class="rolls-countdown">
+<header id="header" class="questions-start text-center">
+ <div class="back-top-quiz"><a href="/#/leaderboard"> <img src="content/images/back-to-quiz.png" alt="back-to-leaderboard"></a> </div>
+  <h1>News</h1>
+  <div class="user-login">
+    <p><span class="firstname">{{firstName}}</span><span class="lastname">{{lastName}}</span></p>
+    <a class="formoreusers" data-toggle="modal" data-target="#profileModal" ng-click="fetchQuizreadystatus()"><img src="content/images/more-icon.png" alt="for more"></a>
+  </div>
+  <!-- Profile Modal -->
+      <div class="rolls-forgetpass rolls-countdownbox" ng-controller="myProfileController">
+         <div id="profileModal" class="modal fade leader-board-quiz" tabindex="-1" role="dialog" aria-labelledby="profileModal">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-body">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+                     <section id="login-screen" class="start-login">
+                        <div class="container">
+                           <div class="row">
+                              <div class="col-xs-12 text-center">
+                                 <div class="logged-in-as"><h1>Currently logged in as:</h1></div>
+                                 <p><span class="firstname">{{firstName}} {{lastName}}</span></p>
+                                 <span class="note_msg text-center">{{note}}</span>
+                                 <form name="notification_settings">
+                                    <div class="rolls-pushnotify">
+                                       <h1>Push Notifications</h1>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Quiz Ready</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio1" id="radio1" ng-model="quiz_ready" value="0" checked="" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio1">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio1" id="radio2" ng-model="quiz_ready" value="1" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio2">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Vip Room Updates</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio2" id="radio3" ng-model="vip_room_update" value="0" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio3">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio2" id="radio4" ng-model="vip_room_update" value="1" checked="" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio4">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </form>
+                                 <div class="btn-separation">
+                                    <button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToChangePassword()">Change Password</button>
+									<button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToLogout()">Log Out</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            </section>
+         </div>
+      </div>
+       <!-- End of Profile Modal -->
+       
+</header>
+
+<!--question tracker-->
+
+<section id="question-tracker" class="article-block">
+  <div class="container">
+    <div ng-if="totalRecordsCount==0" class="row" >
+    <div class="rolls-quiz-details">
+    <div class="no-cntent">
+    {{message}}
+    </div>
+    </div>
+    </div>
+    <div ng-if="totalRecordsCount!=0" class="row" >
+    <h1 class="text-center">Rolls Royce Inside News</h1>
+    
+    <div class="article-block-title clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 article-expires">
+    <h1>Article</h1><h1>Expires</h1></div></div>
+        <div class="story story-details text-left clearfix" ng-repeat="article in filtered_articles">
+      <!--   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"> 
+            <img class="img-responsive" ng-src="{{article_url}}{{article.image}}"  alt=""> 
+        </div> -->
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 article-expires pad0">
+          <!--<h2>{{article.article_title}}</h2>-->
+          
+          <p ng-bind-html="article.short_content" ng-click="showArticleDetails(article.article_id);"></p>
+          <div class="expire-dates">{{article.end_date | date : format : timezone}}</div>
+          <!-- <a class="pull-right more" ng-click="showArticleDetails(article.article_id);">read more...</a> -->
+        </div>
+      </div>
+      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         
+          <nav aria-label="...">
+              
+               <div data-pagination="" data-previous-text="<" data-next-text=">" data-first-text="<<" data-last-text=">>"
+                            data-on-select-page="pageChanged(page)" data-total-items="totalRecordsCount" data-page="currentPage"
+                            data-boundary-links="true" class="pagination pagination-sm" data-max-size="maxSize" data-rotate="false" data-items-per-page="numPerPage">
+                        </div>
+               <pagination total-items="articles.length" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="numPerPage"></pagination>
+        <pagination 
+            ng-model="currentPage"
+            total-items="articles.length"
+            max-size="maxSize"  
+            boundary-links="true">
+           </pagination>
+          </nav>
+        
+          <ul class="pagination pull-right">
+            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          </ul>
+        </nav>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+</div>

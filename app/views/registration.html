@@ -1,0 +1,177 @@
+<div id="register-account"><header id="header"> <span class="logo"> <img class="img-responsive" src="content/images/rollsroyce-logo.png" alt="rollsroyce"> </span> </header>
+<div class="quiz-app">
+    <div class="quiz-app-logo">
+        <img class="img-responsive" src="content/images/quiz-app-logo.png" alt="knowledge-app">
+    </div>
+</div>
+<div class="start-login">
+<section id="login-screen">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="welcome-screen text-center">
+          <h1>Welcome</h1>
+          <p>Please use your company email and create a password.</p>
+          <form id="welcomeForm" name="registration">
+            <div class="form-group" ng-class="{'has-error':email_error}">
+              <!--<input type="email" class="form-control" data-ng-model="email" ng-blur="visitedEmail = true" name="email" id="companyemail" placeholder="Your Company Email" required> -->
+              <input type="email" class="form-control" data-ng-model="email"  ng-change="onEmailChange()" name="email" id="companyemail" placeholder="Your Company Email" required>
+            </div>
+            <div class="form-group" ng-class="{'has-error':password_error}">
+              <input type="password" name="password" data-ng-model="password"  ng-change="onPasswordChange()" class="form-control" id="passwordforemail" placeholder="Create A Password" required>
+            </div>
+            <p class="password-count">Your password must be a minimum of 8 characters and contain at least one capital letter and one number.</p>
+            <p class="forgotpassword"><a data-toggle="modal" data-target="#myModal">Forgot your email?</a></p>
+            <span class="success_msg">{{message}}</span>
+            <span class="error_msg">{{errorMessage}}</span>
+            <!--<div class="error_msg" ng-show="registration.email.$dirty && registration.email.$invalid && visitedEmail">
+                  <span ng-show="registration.email.$error.required">
+			           Please Enter Your Email.</span> 
+			 	  <span  ng-show="registration.email.$error.email"> Please Enter Your Valid Email</span>
+			 </div>-->
+            <button disabled="true" id="welcomeFormSubmitBtn" type="submit"  class="btn" ng-class="{btn_default:registration.$invalid }" ng-click="registerSalesAssociate()" ng-disabled="registration.$invalid || email_error || password_error" >CREATE ACCOUNT </button>
+          	<p class="terms_conditions_agree">By creating an account, you are agreeing to our <a data-toggle="modal" data-target="#terms_conditions_modal">Terms and Conditions</a></p>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+
+  </div>
+     <div class="btn-separation">
+          <button type="button" class="btn btn_default common-greybtn"  ng-click="loginUsers()" >I HAVE AN ACCOUNT</button>
+      </div>
+</section>
+</div>
+</div>
+
+ <!--forgot password popup-->
+    <div class="rolls-forgetpass">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+       <section id="login-screen" class="start-login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+      
+        <div class="text-center">
+          <h1>Forgot your email?</h1>
+          <div class="info-box">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.</p>
+          <div class="more-contents"><img src="content/images/more-contents.png" alt="knowledge-app"></div>
+          <h1>Forgot your password?</h1>
+          <p>Enter your company email below and we will send you a link to change your password.</p>
+          </div>
+          
+          <form id="forgotpwdform" name="forgotpwd">
+            <div class="form-group">
+              <input type="email" data-ng-model="email" class="form-control" id="forgotcompanyemail" placeholder="Your Company Email" required>
+            </div>
+             <div class="forgotpass-section">
+            <!--<p class="forgotpassword"><a ng-href="/#/login">Login</a></p>-->
+            <span class="error_msg">{{errorMessage}}</span>
+            </div>
+            <span class="error_msg"></span>
+          
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+<div class="forgetpass-submission">
+<button id="forgotFormSubmitBtn" data-toggle="modal" data-target="#checkmail" type="submit" class="btn btn_default" ng-class="{btn_default:forgotpwd.$invalid}" ng-click="forgotpwdSalesAssociate()" ng-disabled="forgotpwd.$invalid">Send Email</button>
+  <!--<button id="forgotFormSubmitBtn" type="submit" class="btn btn_default" ng-class="{btn_default:forgotpwd.$invalid}" ng-click="forgotpwdSalesAssociate()" ng-disabled="forgotpwd.$invalid">Send Email</button>-->
+  </div>
+      </div>
+<!--       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+</div>
+
+<!--check mail-->
+ <div class="rolls-forgetpass">
+    <div class="modal fade" id="checkmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+       <section id="login-screen" class="start-login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+      
+        <div class="text-center">
+          <h1>Check your email.</h1>
+          <div class="info-box">
+          <p>A link to set a new password has been emailed to you.</p>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+	
+</section>
+<div class="forgetpass-submission">
+  <button id="forgotFormSubmitBtn" type="submit" class="btn btn_default" ng-click="reloadlogin()">Ok</button>
+  </div>
+      </div>
+<!--       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+</div>
+<!--check mail end-->
+
+<!--  Terms and Conditions Modal/Pop Up -->
+
+<div class="rolls-forgetpass">
+    <div class="modal fade" id="terms_conditions_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body terms_screen">
+		      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+				  <div class="container">
+				    <div class="row">
+				      <div class="col-xs-12 terms">
+				          <h1>Terms & Conditions</h1>
+				      		<p>
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      		</p>
+				      		<p>
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      		</p>
+				      		<p>
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultricies venenatis magna, vulputate vehicula arcu molestie id.
+				      		</p>
+	      		     </div>
+	    		   </div>
+	   		     </div>
+      	  </div>
+    	</div>
+   	 </div>
+    </div>
+</div>

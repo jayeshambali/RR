@@ -1,0 +1,109 @@
+<div id="quiz-started" class="rolls-countdown">
+<header id="header" class="questions-start text-center">
+<div class="back-top-quiz"><a ng-href="/#/{{article_link}}"> <img src="content/images/back-to-quiz.png" alt="back-to-quiz"></a> </div>
+  <h1>Articles</h1>
+  <div class="user-login">
+    <p><span class="firstname">{{firstName}}</span><span class="lastname">{{lastName}}</span></p>
+    <a class="formoreusers" data-toggle="modal" data-target="#profileModal" ng-click="fetchQuizreadystatus()"><img src="content/images/more-icon.png" alt="for more"></a>
+  </div>
+  <!-- Profile Modal -->
+      <div class="rolls-forgetpass rolls-countdownbox" ng-controller="myProfileController">
+         <div id="profileModal" class="modal fade leader-board-quiz" tabindex="-1" role="dialog" aria-labelledby="profileModal">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-body">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+                     <section id="login-screen" class="start-login">
+                        <div class="container">
+                           <div class="row">
+                              <div class="col-xs-12 text-center">
+                                 <div class="logged-in-as"><h1>Currently logged in as:</h1></div>
+                                 <p><span class="firstname">{{firstName}} {{lastName}}</span></p>
+                                 <span class="note_msg text-center">{{note}}</span>
+                                 <form name="notification_settings">
+                                    <div class="rolls-pushnotify">
+                                       <h1>Push Notifications</h1>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Quiz Ready</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio1" id="radio1" ng-model="quiz_ready" value="0" checked="" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio1">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio1" id="radio2" ng-model="quiz_ready" value="1" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio2">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Vip Room Updates</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio2" id="radio3" ng-model="vip_room_update" value="0" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio3">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio2" id="radio4" ng-model="vip_room_update" value="1" checked="" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio4">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </form>
+                                 <div class="btn-separation">
+                                    <button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToChangePassword()">Change Password</button>
+									<button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToLogout()">Log Out</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            </section>
+         </div>
+      </div>
+       <!-- End of Profile Modal -->
+       
+</header>
+
+<!--question tracker-->
+
+<section id="question-tracker" class="article-block">
+  <div class="container">
+    <div class="row">
+      <div class="story story-detail-block text-left clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <span class="expiry-date">Article Expires on {{expiry_date}}</span>
+          <h1>{{article_title}}</h1>
+          <p ng-bind-html="article_content"></p>
+          <div class="story-images">
+            <img src="{{article_img_dir}}{{article_image}}" class="img-responsive" alt="back-to-quiz">
+          </div>
+          <p ng-bind-html="article_content"></p>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>
+
+</div>

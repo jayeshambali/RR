@@ -1,0 +1,154 @@
+<div class="rolls-countdown">
+   <header id="header">
+      <span class="logo"> <img class="img-responsive" src="content/images/rollsroyce-logo.png" alt="rollsroyce"> </span> 
+      <div class="user-login">
+         <p><span class="firstname">{{firstName}}</span><span class="lastname">{{lastName}}</span></p>
+         <!--    <a href="" ng-click="logoutSalesAssociate()" >Logout</a>  -->
+         <a class="formoreusers" data-toggle="modal" data-target="#profileModal" ng-click="fetchQuizreadystatus()"><img src="content/images/more-icon.png" alt="for more"></a> 
+      </div>
+      <!-- Profile Modal -->
+      <div class="rolls-forgetpass rolls-countdownbox" ng-controller="myProfileController">
+         <div id="profileModal" class="modal fade leader-board-quiz" tabindex="-1" role="dialog" aria-labelledby="profileModal">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-body">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+                     <section id="login-screen" class="start-login">
+                        <div class="container">
+                           <div class="row">
+                              <div class="col-xs-12 text-center">
+                                 <div class="logged-in-as"><h1>Currently logged in as:</h1></div>
+                                 <p><span class="firstname">{{firstName}} {{lastName}}</span></p>
+                                 <span class="note_msg text-center">{{note}}</span>
+                                 <form name="notification_settings">
+                                    <div class="rolls-pushnotify">
+                                       <h1>Push Notifications</h1>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Quiz Ready</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio1" id="radio1" ng-model="quiz_ready" value="0" checked="" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio1">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio1" id="radio2" ng-model="quiz_ready" value="1" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio2">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                       <!-- <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Vip Room Updates</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio2" id="radio3" ng-model="vip_room_update" value="0" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio3">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio2" id="radio4" ng-model="vip_room_update" value="1" checked="" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio4">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div> -->
+                                    </div>
+                                 </form>
+                                 <div class="btn-separation">
+                                    <button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToChangePassword()">Change Password</button>
+									<button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToLogout()">Log Out</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            </section>
+         </div>
+      </div>
+       <!-- End of Profile Modal -->
+       
+   </header>
+   <div class="quiz-app">
+      <div class="quiz-app-logo"> <img class="img-responsive" src="content/images/quiz-app-logo.png" alt="knowledge-app"></div>
+   </div>
+   <section class="weekly-quiz">
+      <div class="counter-clock-bg" ng-switch="nextQuizExists">
+         <div class="container">
+            <div class="ranking-days clearfix">
+               <div class="col-xs-6 text-center border-right">
+                  <span class="ranking-score start-quiz-score">{{LoggedinUserDetails.rank}}</span>
+                  <span class="rank-score">Rank</span>
+               </div>
+               <div class="col-xs-6 text-center border-left">
+                  <span class="rankyour-score start-quiz-score">{{LoggedinUserDetails.total_percentage | number:2}}%</span>
+                  <span class="rank-score rank-score-title">Average Score</span>
+                  <span class="rank-score rank-score-text">over last 2 quizzes</span>
+               </div>
+            </div>
+            <div ng-switch-when=1>
+               <div class="welcome-screen text-center">
+                  <h1>Next quiz will be available in:</h1>
+                  <!-- <p>...will be available in:</p> -->
+               </div>
+               <div class="row">
+                  <div class="counter clearfix">
+                     <div class="col-xs-4 text-center">
+                        <h3>{{nextQuizTime.days}}</h3>
+                        <span class="counter-info">Days</span>
+                     </div>
+                     <div class="col-xs-4 text-center">
+                        <h3>{{nextQuizTime.hours}}</h3>
+                        <span class="counter-info">Hours</span>
+                     </div>
+                     <div class="col-xs-4 text-center">
+                        <h3>{{nextQuizTime.minutes}}</h3>
+                        <span class="counter-info">Minutes</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div ng-switch-when=0 class="welcome-screen text-center">
+               <h1>No Quiz are queued up for you.</h1>
+               <p>Kindly check later for updates.</p>
+            </div>
+         </div>
+         <div class="btn-separation">
+            <div class="leader-board">
+               <div class="row">
+                  <div class="col-xs-12">
+                     <a href="/#/leaderboard" id="leaderboard" type="submit" class="btn btn-default">Leaderboard</a>
+                  </div>
+               </div>
+               <!-- <div class="row margin3">
+                  <div class="col-xs-12">
+                     <a href="/#/articles" id="leaderboard" type="submit" class="btn btn-default">VIP ROOM *</a>
+                  </div>
+               </div> 
+               <div class="row margin3">
+                  <div class="col-xs-12 text-center">
+                     <p>* 80% or better average over the last 2 quizzes<br> required to access the VIP Room.</p>
+                  </div>
+               </div>-->
+            </div>
+         </div>
+         <!-- <div class="container" >
+            </div> -->
+      </div>
+   </section>
+</div>

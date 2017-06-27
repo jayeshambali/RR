@@ -1,0 +1,157 @@
+<div id="quiz-started" class="rolls-countdown">
+<header id="header" class="questions-start text-center">
+
+  
+  <div class="back-top-quiz"><a href="/#/start_quiz"> <img src="content/images/back-to-quiz.png" alt="back-to-quiz"></a> </div>
+
+  <h1>Leaderboard</h1>
+  <div class="user-login">
+
+    <p><span class="firstname">{{firstName}}</span><span class="lastname">{{lastName}}</span></p>
+    <!-- <a href="" ng-click="logoutSalesAssociate()" >Logout</a> -->
+
+    <a class="formoreusers" data-toggle="modal" data-target="#profileModal" ng-click="fetchQuizreadystatus()" ><img src="content/images/more-icon.png" alt="for more" ></a>
+  </div>
+  <!-- Profile Modal -->
+      <div class="rolls-forgetpass rolls-countdownbox" ng-controller="myProfileController">
+         <div id="profileModal" class="modal fade leader-board-quiz" tabindex="-1" role="dialog" aria-labelledby="profileModal">
+            <div class="modal-dialog">
+               <!-- Modal content-->
+               <div class="modal-content">
+                  <div class="modal-body">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><img src="content/images/exit-icon.png" alt="knowledge-app"></span></button>
+                     <section id="login-screen" class="start-login">
+                        <div class="container">
+                           <div class="row">
+                              <div class="col-xs-12 text-center">
+                                 <div class="logged-in-as"><h1>Currently logged in as:</h1></div>
+                                 <p><span class="firstname">{{firstName}} {{lastName}}</span></p>
+                                 <span class="note_msg text-center">{{note}}</span>
+                                 <form name="notification_settings">
+                                    <div class="rolls-pushnotify">
+                                       <h1>Push Notifications</h1>
+                                       <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Quiz Ready</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio1" id="radio1" ng-model="quiz_ready" value="0" checked="" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio1">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio1" id="radio2" ng-model="quiz_ready" value="1" ng-change="onNotificationSettingChange('quiz_ready')">
+                                                   <label for="radio2">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                       <!-- <div class="row notify-headlines">
+                                          <div class="col-xs-7 col-md-7 col-sm-7 col-lg-7">
+                                             <h1>New Vip Room Updates</h1>
+                                          </div>
+                                          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                                             <fieldset>
+                                                <div class="radio notify-off pull-left">
+                                                   <input type="radio" name="radio2" id="radio3" ng-model="vip_room_update" value="0" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio3">
+                                                   Off
+                                                   </label>
+                                                </div>
+                                                <div class="radio pull-left">
+                                                   <input type="radio" name="radio2" id="radio4" ng-model="vip_room_update" value="1" checked="" ng-change="onNotificationSettingChange('vip_room_update')">
+                                                   <label for="radio4">
+                                                   On
+                                                   </label>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div> -->
+                                    </div>
+                                 </form>
+                                 <div class="btn-separation">
+                                    <button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToChangePassword()">Change Password</button>
+									<button id="forgotFormSubmitBtn" type="button" class="btn btn_default common-greybtn" ng-click="redirectToLogout()">Log Out</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            </section>
+         </div>
+      </div>
+       <!-- End of Profile Modal -->
+       
+
+</header>
+
+<!--question tracker-->
+
+<section id="score-board-details" class="leaderboard-full text-center">
+
+  <div class="container pad0">
+
+  <div class="leader-board-quiz">
+
+    <div class="ranking-days clearfix">
+
+      <p>Rankings for the last 365 days.</p>
+
+      <div class="col-xs-12 text-center"><span class="ranking-score">{{LoggedinUserDetails.rank}}</span><span class="rank-score">Rank</span></div>
+     <!--  <div class="col-xs-6 text-center"><span class="rankyour-score">{{LoggedinUserDetails.total_score}}</span><span class="rank-score rank-score-title">Total Rank Points</span></div>
+      <div class="col-xs-4 text-center"><span class="rank-score rank-score-title">Your Percentage</span><span class="rankyour-score">{{LoggedinUserDetails.total_percentage | number:2}}%</span></div> -->
+
+    </div>
+
+    <div class="scrollable-table clearfix">
+
+    <table class="table table-striped">
+
+      <thead>
+
+        <tr>
+
+          <th>Rank</th>
+
+          <th>Name</th>
+
+          <!-- <th>Score</th> -->
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+  <!-- ng-init="currentuser=LoggedinUserDetails.user_id === user.user_id ? 'current-user' : '' "  -->
+        <tr ng-repeat="user in userDetails  track by $index"  ng-class="{current_user: currentuser=LoggedinUserDetails.user_id === user.user_id ? true : false}" >
+
+          <td>{{user.rank}}</td>
+
+          <td>{{user.first_name}}&nbsp;{{user.last_name}} <br><span>{{user.dealer_name}}</span></td>
+
+          <!-- <td>{{user.total_score}}</td> -->
+
+        </tr>
+
+ 
+
+      </tbody>
+
+    </table>
+
+    </div>
+
+  </div>
+
+  </div>
+
+</section>
+</div>
+
